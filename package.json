@@ -21,9 +21,6 @@
     "format:check": "prettier --check .",
     "test": "npm run test --workspaces --if-present",
     "test:ai": "pytest apps/ai-service/tests -v",
-    "db:up": "docker compose up -d db",
-    "db:down": "docker compose down",
-    "db:logs": "docker compose logs -f db",
     "prisma:generate": "prisma generate --schema=./prisma/schema.prisma",
     "prisma:studio": "prisma studio --schema=./prisma/schema.prisma",
     "prisma:validate": "prisma validate --schema=./prisma/schema.prisma"

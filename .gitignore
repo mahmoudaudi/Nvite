@@ -57,9 +57,6 @@ Thumbs.db
 *.swp
 *.swo
 
-# Docker
-.dockerignore
-
 # Misc
 tmp/
 temp/

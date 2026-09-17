@@ -8,7 +8,7 @@ No application models yet. The final ERD will be implemented in the next phase.
 
 ## Commands (run from repo root)
 
-- `docker compose up -d db` — start PostgreSQL 16 locally
+- Start native PostgreSQL 16 locally and create the `event_invitation` database
 - `npm run prisma:validate` — validate schema
 - `npm run prisma:generate` — generate Prisma Client
 - `npm run prisma:studio` — open Prisma Studio

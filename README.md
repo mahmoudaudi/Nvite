@@ -23,9 +23,9 @@ See `docs/architecture.md`.
 | ---------- | ----------------------------------------------------------------------------------------------------- |
 | Frontend   | Next.js 14 (App Router), TypeScript (strict), Tailwind CSS 3, ESLint, Prettier, Vitest                |
 | Backend    | Node.js 20+, NestJS 10, TypeScript (strict), class-validator, Joi config validation, Jest + Supertest |
-| Database   | PostgreSQL 16 (Docker), Prisma ORM + CLI                                                              |
+| Database   | PostgreSQL 16 (native install), Prisma ORM + CLI                                                      |
 | AI service | Python 3.12, FastAPI, Pydantic v2, pytest (replaceable `AIProvider` abstraction)                      |
-| Tooling    | npm workspaces, docker compose, Prettier                                                              |
+| Tooling    | npm workspaces, Prettier                                                                              |
 
 ## Project structure
 
@@ -38,7 +38,6 @@ See `docs/architecture.md`.
 ├── packages/config/   # Shared non-secret defaults
 ├── prisma/            # Prisma generator + datasource (NO models yet — ERD pending)
 ├── docs/              # architecture, development, api, database, ai-service
-├── docker-compose.yml # PostgreSQL 16
 ├── .env.example
 └── package.json       # workspaces + orchestration scripts
 ```
@@ -47,7 +46,7 @@ See `docs/architecture.md`.
 
 - Node.js >= 20, npm >= 10
 - Python >= 3.11 (3.12 recommended) + `venv`
-- Docker + Docker Compose (for PostgreSQL)
+- PostgreSQL 16 (installed and running locally, no Docker)
 - Git
 
 ## Installation
@@ -77,24 +76,24 @@ Copy `.env.example` → `.env`. Per-app templates: `apps/web/.env.example`,
 
 `.env` is git-ignored. Never hard-code secrets.
 
-## Database setup
+## Database setup (native PostgreSQL, no Docker)
+
+1. Install PostgreSQL 16 natively and start the server.
+2. Create the database (adjust user/password to match your `DATABASE_URL`):
 
 ```bash
-docker compose up -d db        # start PostgreSQL 16
-docker compose logs -f db      # watch readiness (healthy via pg_isready)
+createdb event_invitation
+pg_isready -h localhost -p 5432   # expect: accepting connections
+```
+
+3. From the repo root:
+
+```bash
 npm run prisma:validate        # validate prisma/schema.prisma
 npm run prisma:generate        # generate Prisma Client
 ```
 
 Prisma schema intentionally has **no models** — the final ERD arrives in the next phase.
-
-## Docker setup
-
-Only PostgreSQL is containerized (keeps dev simple). `docker-compose.yml` provides
-service `db` (postgres:16-alpine, volume `pgdata`, healthcheck). App services run
-natively via npm/uvicorn.
-
-- `npm run db:up` / `npm run db:down` / `npm run db:logs`
 
 ## Frontend startup (Next.js :3000)
 

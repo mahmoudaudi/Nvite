@@ -2,7 +2,7 @@
 
 1. `cp .env.example .env` (and `apps/web/.env.local`, `apps/api/.env`, `apps/ai-service/.env` as needed)
 2. `npm install`
-3. `docker compose up -d db` (PostgreSQL)
+3. Start native PostgreSQL 16 and create the `event_invitation` database
 4. Run services (separate terminals):
    - `npm run dev:web` (Next.js :3000)
    - `npm run dev:api` (NestJS :3001)

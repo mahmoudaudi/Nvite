@@ -6,7 +6,7 @@ apps/web (Next.js :3000)
   ▼
 apps/api (NestJS :3001, prefix /api + URI version v1)
   │  GET /api/v1/health
-  ├──► PostgreSQL :5432 (docker compose `db`, Prisma in /prisma)
+  ├──► PostgreSQL :5432 (native install, Prisma in /prisma)
   └──► apps/ai-service (FastAPI :8000, GET /health, /api/v1/health)
 ```
 
