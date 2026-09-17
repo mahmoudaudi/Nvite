@@ -1,0 +1,22 @@
+// =============================================================================
+// Prisma schema — INFRASTRUCTURE ONLY (setup phase).
+//
+// The final ERD has NOT been provided yet, so NO application models are defined
+// here on purpose. Do NOT add User / Event / Invitation / Guest / RSVP /
+// Subscription / Payment / Analytics / AI-usage tables until the ERD arrives.
+//
+// This file establishes:
+//   - generator (prisma-client-js)
+//   - datasource (postgresql, DATABASE_URL from env)
+// =============================================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// NOTE: Application models will be added in the next phase per the final ERD.
