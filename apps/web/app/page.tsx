@@ -19,9 +19,7 @@ export default function HomePage() {
           <Button>Setup OK</Button>
         </div>
       </Card>
-      <p className="text-xs text-slate-400">
-        Setup phase only — no product features implemented.
-      </p>
+      <p className="text-xs text-slate-400">Setup phase only — no product features implemented.</p>
     </main>
   );
 }
