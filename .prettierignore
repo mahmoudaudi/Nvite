@@ -4,3 +4,4 @@ build
 .next
 coverage
 node_modules
+.agents
