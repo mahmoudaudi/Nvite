@@ -46,7 +46,7 @@ See `docs/architecture.md`.
 
 - Node.js >= 20, npm >= 10
 - Python >= 3.11 (3.12 recommended) + `venv`
-- PostgreSQL 16 (installed and running locally, no Docker)
+- PostgreSQL 16 (native local install) **or** a Supabase project (online, no Docker)
 - Git
 
 ## Installation
@@ -76,7 +76,19 @@ Copy `.env.example` → `.env`. Per-app templates: `apps/web/.env.example`,
 
 `.env` is git-ignored. Never hard-code secrets.
 
-## Database setup (native PostgreSQL, no Docker)
+## Database setup (PostgreSQL — local or Supabase, no Docker)
+
+Pick one option:
+
+**Option A — Supabase (online, recommended if you don't want a local install):**
+
+1. Create a free project at https://supabase.com
+2. Go to Project Settings → Database → Connection string → URI (use the
+   **Direct connection**, port `5432`).
+3. URL-encode special characters in the password (e.g. `@` → `%40`) and put it
+   in your `.env` as `DATABASE_URL`.
+
+**Option B — native PostgreSQL 16:**
 
 1. Install PostgreSQL 16 natively and start the server.
 2. Create the database (adjust user/password to match your `DATABASE_URL`):
@@ -86,7 +98,7 @@ createdb event_invitation
 pg_isready -h localhost -p 5432   # expect: accepting connections
 ```
 
-3. From the repo root:
+Then, from the repo root (both options):
 
 ```bash
 npm run prisma:validate        # validate prisma/schema.prisma
